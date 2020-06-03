@@ -24,8 +24,8 @@ enum custom_keycodes {
   MY_NTEQ, // != : not equal
   MY_CLEQ, // := : cologne equal
   MY_3GRV, // ``` : the phrase "```""
-  MY_CDBL, // ```~``` : code block
-  MY_BKBL, // `~` : back quote block
+  MY_CDBL, // ```~``` : code block with copied
+  MY_BKBL, // `~` : back quote block with copied
   MY_DBSL, // // : double slash
 };
 
@@ -102,8 +102,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 |      |      |------|       |------| Next |KANA  |
- *                                 |      |      |      |       |      | Tab  |      |
+ *                                 |      |      |------|       |------|      |KANA  |
+ *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
 // SYMBOLS
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                     // guide
     KC_TRNS,    KC_TRNS,
     KC_TRNS,
-    KC_TRNS,    MY_NXTB,    MC_KANA
+    KC_TRNS,    KC_TRNS,    MC_KANA
 ),
 /* Keymap 2: Media and mouse keys
  *
@@ -146,8 +146,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 | EISU | Prev |------|       |------|      |      |
- *                                 |      | Tab  |      |       |      |      |      |
+ *                                 | EISU |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE
@@ -160,7 +160,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                     // guide
                                                                 KC_TRNS,    KC_TRNS,
                                                                             KC_TRNS,
-                                                    MC_EISU,    MY_PRTB,    KC_TRNS,
+                                                    MC_EISU,    KC_TRNS,    KC_TRNS,
 // right hand
     KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
     KC_TRNS,    KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_PIPE,
@@ -216,14 +216,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING ("```");
         return false;
       case MY_CDBL:
-        SEND_STRING ("```");
-        SEND_STRING (SS_LGUI("v"));
-        SEND_STRING ("```");
+        SEND_STRING (SS_TAP(X_LANG2)); // force EISU
+        SEND_STRING ("```" SS_TAP(X_ENT));
+        SEND_STRING (SS_LGUI("v")  SS_TAP(X_ENT));
+        SEND_STRING ("```"  SS_TAP(X_ENT));
         return false;
       case MY_BKBL:
-        SEND_STRING ("`");
-        SEND_STRING (SS_LGUI("v"));
-        SEND_STRING ("`");
+        SEND_STRING (SS_TAP(X_LANG2)); // force EISU
+        SEND_STRING ("`" SS_LGUI("v") "`");
         return false;
       case MY_DBSL:
         SEND_STRING ("//");
