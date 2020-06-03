@@ -18,13 +18,13 @@
 // zoom shortcut
 // https://support.zoom.us/hc/en-us/articles/205683899-Hot-Keys-and-Keyboard-Shortcuts-for-Zoom
 
-#define ZM_AUDIO  G(S(KC_A)) // Mute/unmute audio
-#define ZM_PTT    KC_SPACE   // Push to talk
-#define ZM_VIDEO  G(S(KC_V)) // Start/stop video
-#define ZM_SCREEN G(S(KC_S)) // Start/stop screen share
-#define ZM_VIEW   G(S(KC_W)) // Switch to active speaker view or gallery view
-#define ZM_LEAVE  G(KC_W)    // Prompt to End or Leave Meeting
-#define ZM_CONTRL C(KC_BSLS) // Toggle the "Always Show meeting controls" options in Settings/Accessibility
+#define ZM_AUDIO  G(S(KC_F11)) // Mute/unmute audio (shortcut customization required)
+#define ZM_PTT    KC_SPACE     // Push to talk
+#define ZM_VIDEO  G(S(KC_F12)) // Start/stop video (shortcut customization required)
+#define ZM_SCREEN G(S(KC_S))   // Start/stop screen share
+#define ZM_VIEW   G(S(KC_W))   // Switch to active speaker view or gallery view
+#define ZM_LEAVE  G(KC_W)      // Prompt to End or Leave Meeting
+#define ZM_CONTRL C(KC_BSLS)   // Toggle the "Always Show meeting controls" options in Settings/Accessibility
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
